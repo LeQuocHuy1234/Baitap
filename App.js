@@ -5,45 +5,46 @@
  * @format
  * @flow
  */
+import React from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import HomeScreen from './component/HomeScreen';
+import SettingScreen from './component/SettingScreen';
+import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+const { width } = Dimensions.get('window');
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
+const AppNavigator = createDrawerNavigator({
+  Home: {
+    screen: HomeScreen,
+  },
+  Setting: {
+    screen : SettingScreen
   }
-}
+},{
+  initialRouteName:'Home',
+  drawerPosition:'left',
+  contentOptions: {
+    activeTintColor: '#F50057',
+    inactiveTintColor :'#1999CE',
+    activeBackgroundColor :'#E8EAF6',
+  },
+  drawerWidth: width*2/3,
+  drawerBackgroundColor:'#b3ffe6',
+  // contentComponent: ({navigation}) => {
+  //   return(
+  //     <View>
+  //       <Text onPress={ () => navigation.navigate('Home') } style = {styles.itemMenu}>HomeScreen</Text>
+  //       <Text onPress={ () => navigation.navigate('Setting') } style = {styles.itemMenu}>SettingScreen</Text>
+  //     </View>
+  //   )
+  // }
+});
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+  itemMenu: {
+    padding: 10,
+    fontWeight: 'bold',
+  }
+})
+
+export default createAppContainer(AppNavigator);
