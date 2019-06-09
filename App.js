@@ -5,31 +5,44 @@
  * @format
  * @flow
  */
-
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import {createDrawerNavigator, createAppContainer, createBottomTabNavigator} from 'react-navigation';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import HomeScreen from './component/HomeScreen';
 import SettingScreen from './component/SettingScreen';
+import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-
-const MyNavigator = createBottomTabNavigator({
+const AppNavigator = createDrawerNavigator({
   Home: {
     screen: HomeScreen,
   },
   Setting: {
-    screen: SettingScreen,
+    screen : SettingScreen
+  }
+},{
+  initialRouteName:'Home',
+  drawerPosition:'left',
+  contentOptions: {
+    activeTintColor: '#F50057',
+    inactiveTintColor :'#1999CE',
+    activeBackgroundColor :'#E8EAF6',
   },
+  drawerWidth: 300,
+  drawerBackgroundColor:'#b3ffe6',
+  // contentComponent: ({navigation}) => {
+  //   return(
+  //     <View>
+  //       <Text onPress={ () => navigation.navigate('Home') } style = {styles.itemMenu}>HomeScreen</Text>
+  //       <Text onPress={ () => navigation.navigate('Setting') } style = {styles.itemMenu}>SettingScreen</Text>
+  //     </View>
+  //   )
+  // }
 });
 
-const App = createAppContainer(MyNavigator);
+const styles = StyleSheet.create({
+  itemMenu: {
+    padding: 10,
+    fontWeight: 'bold',
+  }
+})
 
-export default App;
-
+export default createAppContainer(AppNavigator);
