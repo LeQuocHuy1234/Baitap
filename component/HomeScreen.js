@@ -8,9 +8,10 @@ export default class HomeScreen extends Component {
             activeTintColor: 'red',
             inactiveTintColor: 'green',
         },
-        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        tabBarIcon: () => {
             return <Ionicons name="ios-home" size = {25}/>
-        }
+        },
+        tabBarLabel: 'Home'
     };
     render() {
         return (

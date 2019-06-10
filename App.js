@@ -5,44 +5,22 @@
  * @format
  * @flow
  */
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
+import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
 import HomeScreen from './component/HomeScreen';
 import SettingScreen from './component/SettingScreen';
-import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 
-const AppNavigator = createDrawerNavigator({
+const MyNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
   },
   Setting: {
-    screen : SettingScreen
-  }
-},{
-  initialRouteName:'Home',
-  drawerPosition:'left',
-  contentOptions: {
-    activeTintColor: '#F50057',
-    inactiveTintColor :'#1999CE',
-    activeBackgroundColor :'#E8EAF6',
+    screen: SettingScreen,
   },
-  drawerWidth: 300,
-  drawerBackgroundColor:'#b3ffe6',
-  // contentComponent: ({navigation}) => {
-  //   return(
-  //     <View>
-  //       <Text onPress={ () => navigation.navigate('Home') } style = {styles.itemMenu}>HomeScreen</Text>
-  //       <Text onPress={ () => navigation.navigate('Setting') } style = {styles.itemMenu}>SettingScreen</Text>
-  //     </View>
-  //   )
-  // }
 });
 
-const styles = StyleSheet.create({
-  itemMenu: {
-    padding: 10,
-    fontWeight: 'bold',
-  }
-})
+const App = createAppContainer(MyNavigator);
 
-export default createAppContainer(AppNavigator);
+export default App;
